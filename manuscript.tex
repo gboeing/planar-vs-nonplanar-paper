@@ -35,7 +35,7 @@
 
 \section{Introduction}
 
-In urban planning and urban design research, street networks are routinely used to calculate accessibility between origins and destinations or to compute indicators of the urban form, such as block sizes or intersection density and connectivity.
+In urban planning and urban design research, street networks are routinely used to calculate accessibility between origins and destinations or to compute indicators of the urban form, such as block sizes or intersection density and connectivity. Mathematical models of street networks, called graphs, have grown ubiquitous in the urban studies literature in recent years as they can be used to usefully model pedestrian volume, household travel patterns, urban design patterns and spatial morphology, access and equity, and location centrality and polycentricity \citep{marshall_street_2010,porta_alterations_2014,marshall_community_2014,hajrasouliha_impact_2015,parthasarathi_street_2015,knight_metrics_2015,gil_street_2016,zhong_revealing_2017}.
 
 This article presents two new measures of the degree of nonplanarity for urban street networks that can be generalized to any spatial network. It compares the results and interpretation of these nonplanarity indicators to the formal, mathematical planarity of street networks around the world. Despite common claims in the literature that street networks are planar graphs, this study finds that they generally are not and that planar graphs poorly model the street networks of many cities. Further, the magnitude of this bias varies substantially across cities and urbanization types.
 
@@ -44,7 +44,7 @@ This article is organized as follows. The following section introduces the relev
 
 \section{Background}
 
-First, a few definitions are in order. Graph theory is the mathematical study of networks \citep{newman_networks:_2010}. Graphs can mathematically model real-world networks such as friendships or the Internet as well as spatial networks, such urban street networks \citep{barthelemy_spatial_2011}. A graph $G$ consists of a set of nodes $N$ connected to one another by a set of edges $E$. An edge $uv$ in a directed graph points in one direction from some node $u$ to some node $v$, but an undirected graph's edges all mutually point in both directions. How a graph's nodes and edges connect to one another defines its topology. For example, a node's degree is a topological trait that represents how many edges connect to that node. A planar graph can be drawn on a two-dimensional plane without any of its edges crossing each other, except where they intersect at nodes. If the graph \emph{cannot} be drawn or redrawn to meet this criterion, then the graph is nonplanar \citep{trudeau_introduction_1994}. Street networks are embedded in space, which provides them with geometry --- such as geographical coordinates, lengths, and area --- alongside their topology.
+Graph theory is the mathematical study of networks \citep{newman_networks:_2010}. Graphs can mathematically model real-world networks such as friendships or the Internet as well as spatial networks, such urban street networks \citep{barthelemy_spatial_2011}. A graph $G$ consists of a set of nodes $N$ connected to one another by a set of edges $E$. An edge $uv$ in a directed graph points in one direction from some node $u$ to some node $v$, but an undirected graph's edges all mutually point in both directions. In a street network, the nodes represent intersections and dead-ends, and the (directed) edges represent the street segments that connect them. How a graph's nodes and edges connect to one another defines its \emph{topology}. For example, a node's \emph{degree} is a topological trait that represents how many edges connect to that node. A \emph{planar} graph can be drawn on a two-dimensional plane without any of its edges crossing each other, except where they intersect at nodes. If the graph \emph{cannot} be drawn or redrawn to meet this criterion, then the graph is nonplanar \citep{trudeau_introduction_1994}. Street networks are embedded in space, which provides them with geometry --- such as geographical coordinates, lengths, and area --- alongside their topology.
 
 \begin{table*}[htbp]
 \centering
@@ -71,30 +71,33 @@ Given these issues, what do \emph{approximately planar} and \emph{well-modeled} 
 
 The graph theory literature offers some measures of how \enquote{far off} a nonplanar graph $G$ is from being planar, such as its crossing number --- the minimum number of edge crossings of any drawing of $G$ --- and the skewness --- the minimum number of edges that must be removed from $G$ to produce a planar graph \citep{liebers_planarizing_2001,szekely_successful_2004,chimani_non-planar_2009}. However, these measures are imperfect and hard to compute \citep{chimani_vertex_2012,szekely_successful_2004}. In his discussion of road networks and approximate spatial planarity, \citet[p.~133]{newman_networks:_2010} argues that \enquote{no widely accepted metric for degree of planarity has emerged,} and calls for the development of better indicators.
 
-Such metrics would be particularly useful for street networks, as the extent to which a network is (or is not) planar can characterize the nature of its circulation infrastructure and urban form. For instance, late 20th-century American cities might exhibit lower planarity than older European cities.
-
-In this study, we present two new measures of the extent to which a spatial network is planar. We then analyze various world cities to better understand how well planar graphs model their street networks as well as the extent to which bias (i.e., model misrepresentation) varies across different places or types of urbanization. Finally, we consider what these indicators suggest about the nature of the urban form in different cities.
+Such metrics would be particularly useful for street networks, as the extent to which a network is (or is not) planar can characterize the nature of its circulation infrastructure and urban form. For instance, late 20th-century freeway-oriented American cities might exhibit lower planarity than older walkable European cities. What about informal settlements in developing countries or rapidly urbanizing Chinese cities? Beyond the question of graph model goodness-of-fit, such indicators could provide useful information about urban development, civil infrastructure, and transportation system character.
 
 
 
 \section{Methods}
 
+In this study, we develop two new measures of the extent to which a spatial network is planar. We then analyze various world cities to better understand how well planar graphs model their street networks as well as the extent to which bias (i.e., model misrepresentation) varies across different places and types of urbanization. Finally, we consider what these indicators suggest about the nature of the urban form and transportation infrastructure in different cities.
+
 \subsection{Data}
 
-We analyze the drivable and the walkable street networks in the centers of 50 cities worldwide. Following \citet{jacobs_great_1995} and \citet{cardillo_structural_2006}, we analyze a consistently sized, square-mile network at the centers of each of these cities.
+Following \citet{jacobs_great_1995} and \citet{cardillo_structural_2006}, we analyze a consistently sized, square-mile network at the centers of 50 cities worldwide. This allows us to consistently examine central urban street networks without being swamped by metropolitan-scale variation or the idiosyncrasies of individual municipalities' spatial extents. For cities, such as Moscow, with a newer commercial central business district (CBD) that lies apart from an \enquote{old town} center, we use the modern CBD as the city center. We look separately at their drivable and their walkable street networks.
 
-OSMnx and how the networks are processed. walk vs drive.
+To acquire these street networks, we use OSMnx to download the data for each city and network type from OpenStreetMap. OpenStreetMap is a collaborative online mapping platform commonly used by researchers because of its good worldwide coverage \citep{haklay_how_2010,jokar_arsanjani_openstreetmap_2015}. OSMnx is a Python-based software tool that allows us to automatically download a street network from OpenStreetMap for any study site in the world, and automatically process it into a length-weighted nonplanar directed graph (citation redacted). It differentiates between walkable and drivable routes in the circulation network based on individual elements' metadata that describe how the route may be used. Thus the walkable network may contain surface streets, paths through parks, pedestrian passageways between buildings or under roads, and other walkable paths. The drivable network may contain surface streets, grade-separated freeways, and other drivable paths.
+
+OpenStreetMap graphs contain many interstitial nodes in the middle of street segments (forming an expansion graph) to allow streets to curve through space via a series of straight-line approximations. OSMnx automatically simplifies each graph's topology to retain nodes only at intersections and dead-ends, while faithfully retaining each edge's true spatial geometry. This provides us with an accurate count of intersections and an accurate measure of edge lengths for comparison between the planar and nonplanar representations of our networks.
 
 \subsection{Analysis}
 
-Once we have acquired and prepared our networks, we calculate three indicators of nonplanarity. The first indicator, SPS, represents the ratio of nonplanar intersections (i.e., non-dead-end nodes in the nonplanar, spatially-embedded graph) to planar intersections (i.e., line crossings in the planar, spatially-embedded graph). It indicates the extent to which planarity overstates intersections and connectivity in each street network. A truly planar street network with no bridges or tunnels will thus have a SPS score of 1.0, while lower values suggest the extent to which the network is nonplanar.
+Once we have acquired and prepared our networks, we calculate three measures of planarity.
 
-The second indicator, ELR, represents the ratio of the mean edge length in the planar graph to the mean edge length in the nonplanar graph. It indicates the extent to which planarity understates edge lengths (a linear proxy for block size) in each street network. A truly planar street network with no bridges or tunnels will thus have a ELR score of 1.0, while lower values suggest the extent to which the network is nonplanar.
+The first is a formal test of aspatial planarity using the algorithm described by \citet{boyer_subgraph_2012}. That is, is it possible to rearrange the graph's nodes and edges in space --- while preserving its topology --- so that edges cross only at nodes? This binary true/false indicator tells us if the graph is formally planar, ignoring its real-world spatial embedding. However, street networks are spatially embedded, so we develop the following two continuous measures to assess the \enquote{extent} to which they are planar.
 
-The third indicator is a formal test of aspatial planarity using the algorithm described by \citet{boyer_subgraph_2012}. A graph is mathematically planar if it can be drawn on a two-dimensional surface with edges crossing only at nodes \citep{trudeau_introduction_1994}. Although a street network may be spatially nonplanar due to overpasses or underpasses, this may be a feature of its configuration in space. That is, is it possible to rearrange the nodes and edges in space --- while preserving the graph's topology --- so that edges cross only at nodes? This indicator tells us if the graph is formally planar, ignoring its real-world spatial embedding.
+The second measure is the spatial planarity ratio (SPR). It represents the ratio of nonplanar intersections (i.e., non-dead-end nodes in the nonplanar, three-dimensional, spatially-embedded graph) to planar intersections (i.e., line crossings in the planar, two-dimensional, spatially-embedded graph). It indicates the extent to which planarity overstates intersections and connectivity in each street network. A truly planar network with no bridges or tunnels will thus have an SPR score of 1.0, while lower values suggest the extent to which the network is nonplanar.
 
-Finally, we examine a single city more deeply to better understand how these indicators vary across a single municipality. For this, we analyze the drivable street network of Oakland, California, a reasonably representative midsized American city with a variety of urban form types, from gridded street patterns in its flatlands, to winding culs-de-sac in its hills, to freeways and dense blocks around its downtown. We first analyze the entire city of Oakland and then recreate the aforementioned methodology by sampling 100 random points within the city limits and analyzing a square-mile street network centered on each point. This demonstrates the statistical dispersion of the planarity indicators across a single city and the extent to which agglomerating an entire city's neighborhoods into a single graph may obscure neighborhood-scale effects.
+The third measure is the edge length ratio (ELR). It represents the ratio of the mean edge length in the planar graph to the mean edge length in the nonplanar graph. It indicates the extent to which planarity understates edge lengths in each street network. A truly planar street network with no bridges or tunnels will thus have an ELR score of 1.0, while lower values suggest the extent to which the network is nonplanar.
 
+Finally, we explore how these indicators might vary across a single municipality. To do so we analyze the drivable street network of Oakland, California, a reasonably representative midsized American city with a variety of urban form types from gridded street patterns in its flatlands, to winding culs-de-sac in its hills, to freeways and dense blocks around its downtown. First we analyze the entire city of Oakland. Then we recreate the aforementioned methodology by randomly sampling 100 points within the city limits and analyzing the square-mile street network centered on each. The resulting statistical dispersion of planarity indicators demonstrates the extent to which agglomerating an entire city's neighborhoods into a single graph may obscure neighborhood-scale effects and characteristics.
 
 
 
@@ -103,17 +106,23 @@ Finally, we examine a single city more deeply to better understand how these ind
 
 \subsection{Worldwide Cities}
 
+Among drivable street networks, only x\% pass the formal test of planarity. On average, they are only x\% planar by the SPR measure and x\% planar by the ELR measure. SPR values range from a high of 1.0 in x cities to a low of 57\% in Moscow. ELR values range from a high of 1.0 in x cities to a low of 64\% in Los Angeles.
+
+Among walkable street networks, only x\% pass the formal test of planarity. On average, they are only x\% planar by the SPR measure and x\% planar by the ELR measure. SPR values range from a high of 1.0 in x cities to a low of 74\% in Atlanta. ELR values range from a high of 1.0 in x cities to a low of 72\% in Atlanta.
+
+Mogadishu is the only city to show perfect planarity across all three indicators and both network types. All three Italian cities show perfect planarity in their drivable networks, but not in their walkable networks. 
+
 \begin{figure*}[htbp]
     \center
     \includegraphics[width=\textwidth]{world_map_phi_bw.png}
-    \caption{Map of world cities in Table \ref{tab:world_cities} grouped by SPS score tertiles.}
+    \caption{Map of world cities in Table \ref{tab:world_cities} grouped by SPR score tertiles (lower scores mean less planar).}
     \label{fig:world_map_bw}
 \end{figure*}
 
 
 \begin{table*}[htbp]
 \centering
-\caption{Indicators of nonplanarity for one square mile street networks at the centers of 50 cities worldwide. SPS = spatial planarity score = the ratio of nonplanar intersections to planar intersections. ELR = edge length ratio = the ratio of mean edge length in planar graph to mean edge length in nonplanar graph. Planar = whether street network passed a formal test of planarity.}
+\caption{Planarity measures for the central street networks of 50 cities worldwide (SPR = spatial planarity ratio; ELR = edge length ratio; Planar = whether street network passed the formal test of planarity).}
 \label{tab:world_cities}
 \input{table_world_cities.tex}
 \end{table*}
@@ -124,14 +133,14 @@ Finally, we examine a single city more deeply to better understand how these ind
 \begin{figure*}[htbp]
     \center
     \includegraphics[width=0.5\textwidth]{regression_phi_split.png}
-    \caption{Log-log plot of ELR vs SPS with simple regression lines: drive $r^2=0.98$ and walk $r^2=0.99$.}
+    \caption{Log-log plot of ELR vs SPR with simple regression lines: drive $r^2=0.98$ and walk $r^2=0.99$.}
     \label{fig:regression_split}
 \end{figure*}
 
 
-\subsection{A Deeper Look: Oakland, California}
+\subsection{A Closer Look: Oakland, California}
 
-We find that the street network of the entire city of Oakland is formally nonplanar when subjected to a formal mathematical test. In terms of the nonplanarity indicators, the city as a whole has a SPS score of 0.918, indicating that it is 91.8\% planar, and a ELR score of 0.936. This suggests that the planar representation of Oakland's drivable street network overstates the number of intersections (and thus, the network's connectivity) by 8.9\% city-wide (i.e., $1 / 0.918$ and understates the average edge length by 6.4\% city-wide. However, these indicators' values vary across the city.
+We find that the street network of the entire city of Oakland is formally nonplanar when subjected to a formal mathematical test. In terms of the nonplanarity indicators, the city as a whole has a SPR score of 0.918, indicating that it is 91.8\% planar, and a ELR score of 0.936. This suggests that the planar representation of Oakland's drivable street network overstates the number of intersections (and thus, the network's connectivity) by 8.9\% city-wide (i.e., $1 - 1 / 0.918$ and understates the average edge length by 6.4\% city-wide (i.e., $1 - 0.936$). However, these indicators' values vary across the city.
 
 To explore this statistical variation, we examined 100 square-mile samples of Oakland's drivable street network. Table \ref{tab:samples_city} presents descriptive statistics of these planarity indicators. 
 
@@ -139,7 +148,7 @@ To explore this statistical variation, we examined 100 square-mile samples of Oa
 
 \begin{table}[htbp]
 \centering
-\caption{Descriptive statistics of planarity indicators across 100 random square-mile sample runs in Oakland, California's drivable network.}
+\caption{Descriptive statistics of planarity indicators across 100 random samples in Oakland, California's drivable network.}
 \label{tab:samples_city}
 \input{table_samples_city.tex}
 \end{table}
@@ -151,33 +160,45 @@ To explore this statistical variation, we examined 100 square-mile samples of Oa
 
 \section{Discussion}
 
-Our findings suggest that most street networks in the centers of major cities are mathematically nonplanar but approximately planar. However, this depends on the scale of measurement: across an entire city there is likely to be some underpass or overpass somewhere, while individual neighborhoods or small suburbs might be formally planar. The type and era of urbanization is another factor. Old medieval European towns or informal settlements in the global south contain fewer grade-separated roads (and thus greater planarity) than 20th-century American or 21st-century Chinese metropolises do. This is a result of prevailing transportation technologies when the urban form was built up, as well as terrain, costs, wealth, culture, and politics.
+Our findings suggest that the street networks in the centers of most major cities are formally and spatially nonplanar. However, this depends on the scale of measurement: across an entire city there is likely to be some underpass or overpass somewhere, while individual neighborhoods or small suburbs might be formally planar. The type and era of urbanization is another factor. Old medieval European towns or informal settlements in the global south contain fewer grade-separated roads (and thus greater planarity) than 20th-century American or 21st-century Chinese metropolises do. This is a result of prevailing transportation technologies when the urban form was built up, as well as terrain, costs, wealth, culture, and politics.
 
-Street networks are frequently nonplanar in the formal sense because they are spatially embedded in three dimensions --- not two --- and have a z-coordinate along with their x and y. Because they are mostly planar, typically with only a few overpasses or underpasses, they could often be described accurately as \emph{approximately planar}. However, claiming that urban street networks broadly are planar misrepresents them in several ways.
+Street networks are frequently nonplanar in the formal sense because they are spatially embedded in three dimensions --- not two --- and have a z-coordinate along with their x and y. Because they are mostly planar, typically with only a few overpasses or underpasses, they could often be described accurately as \emph{approximately planar}. However, claiming that urban street networks broadly are planar misrepresents them in several ways:
 
-1. Forces false nodes where grade-separated edges cross.
+\begin{enumerate}
+	\item{Forces false nodes where grade-separated edges cross.}
+	\item{Accordingly, underestimates average edge length (a proxy for street segment lengths and block sizes).}
+	\item{Misrepresents connectivity for routing, accessibility analysis, and other topological studies.}
+\end{enumerate}
 
-2. Accordingly, underestimates average edge length (a proxy for street segment lengths and block sizes)
+This is a bigger problem in Los Angeles than in Florence, but even in Florence, planar overcounts intersections around the \textit{sottopassaggio}, or pedestrian subway, near its central train station, Stazione di Santa Maria Novella. This is a pedestrian walkway, not a drivable road, but in a walkable town like Florence, we would surely want to model pedestrian access as part the street network, not drivable roads only. In this case, the nonplanar public pedestrian network must be considered.
 
-3. Misrepresents connectivity for routing, accessibility analysis, and other connectivity studies
+The problem is consistently and particularly pronounced around the downtowns of North American cities, due to the prevalence of freeways, bridges, and underpasses there. Driving networks are affected by these in particular. Walking networks are more affected by pedestrian flyovers and subways, as in Florence. Even networks of non-freeway, non-pedestrian-only surface streets will often be nonplanar due to bridges or tunnels in hilly neighborhoods or over rivers.
+
+The effect is inconsistent across cities, and across different neighborhoods within individual cities.
 
 Why are they approximately planar? Cost and politics. Expensive to build truly 3-D networks (with z-coordinates as extensive as their x- and y-coordinates) and politically infeasible.
 
-Are street networks planar graphs? Contrary to some of the statements in the urban studies and urban physics literature, our results suggest that this cannot be universally claimed. But perhaps some of it comes down to vocabulary. If road is not synonymous with street, then a road network and a street network may not be synonymous. A road network, including freeways and boulevards, may frequently be nonplanar, but a street network, focusing on municipal streets lined by land parcels, may be at-grade and planar. But this ignores the fact that even residential streets sometimes include bridges and tunnels in hilly neighborhoods, and the fact that our analysis earlier showed that walkable circulation networks in city centers often include pedestrian tunnels and footbridges. A graph is not planar because its edges \emph{usually} or \emph{approximately} intersect only at nodes: it is planar because its edges \emph{exclusively} intersect at nodes.
+\subsection{Are street networks planar graphs?}
 
-Thus, street networks are not universally planar graphs. But as George Box famously stated, \enquote{All models are wrong but some are useful.} Can street networks generally be simplified to planar graphs and still be usefully well-modeled? Then answer depends on the place and on the type of analysis. In limited circumstances, where the circulation network and built form exhibit few underpasses, overpasses, or grade-separation, then perhaps yes. But universally, we must answer no.
+Contrary to some of the statements in the urban studies and urban physics literature, our results suggest that this cannot be universally claimed. But perhaps some of it comes down to vocabulary. If road is not synonymous with street, then a road network and a street network may not be synonymous. A road network, including freeways and boulevards, may frequently be nonplanar, but a street network, focusing on municipal streets lined by land parcels, may be at-grade and planar. But this ignores the fact that even residential streets sometimes include bridges and tunnels in hilly neighborhoods, and the fact that our analysis earlier showed that walkable circulation networks in city centers often include pedestrian tunnels and footbridges. A graph is not planar because its edges \emph{usually} or \emph{approximately} intersect only at nodes: it is planar because its edges \emph{exclusively} intersect at nodes. Thus, street networks are not universally planar graphs. 
 
-Most egregiously, imposing planarity on a nonplanar street network forces pseudonodes at underpasses and overpasses, breaking routing and network-based accessibility modeling. For this reason, nonplanar graphs have been the standard for decades in transportation engineering, real-world traffic assignment models, and routing engines. But planar graphs are often used in the literature to study urban form and morphology. So, aside from routing, do planar graphs offer \emph{useful} models for this type of research? Again, only in limited circumstances, including examples such as the drivable networks in the three Italian cities we analyzed, which are formally planar. The results in Table \ref{tab:world_cities} show how common urban form measures such as intersection counts are overstated by planar models, while average edge lengths (a linear proxy for block size) is consequently understated. Moreover, this misrepresentation behaves inconsistently from place to place. Figure \ref{fig:world_map_bw} demonstrates how the magnitude of bias varies across cities and eras of urbanization.
+\subsection{Are street networks well-modeled by planar graphs?}
+
+As George Box famously stated, \enquote{All models are wrong but some are useful.} Can street networks be simplified to planar graphs and still be usefully well-modeled? The answer depends on the study site and on the type of analysis. In limited circumstances, where the circulation network and built form exhibit few underpasses, overpasses, or grade-separation, then perhaps yes. But universally, we cannot answer yes.
+
+Most egregiously, imposing planarity on a nonplanar street network forces pseudonodes at underpasses and overpasses, breaking routing and network-based accessibility modeling. For this reason, nonplanar graphs have been the standard for decades in transportation engineering, real-world traffic assignment models, and routing engines.
+
+But planar graphs are often used in the literature to study urban form and morphology. So, aside from routing, do planar graphs offer \emph{useful} models for this type of research? Again, only in limited circumstances, including examples such as the drivable networks in the three Italian cities we analyzed, which are both formally and spatially planar. The results in Table \ref{tab:world_cities} show how common urban form measures such as intersection counts are overstated by planar models, while average edge lengths (a linear proxy for block size) is consequently understated. Moreover, this misrepresentation behaves inconsistently from place to place. Figure \ref{fig:world_map_bw} demonstrates how the magnitude of bias varies across cities and eras of urbanization.
 
 So then why use planar graphs? Tractable. In some cities it doesn't matter (Italy). Polygonal analysis of urban blocks. Otherwise use nonplanar, new tools make it easy.
 
 
 \section{Conclusion}
 
-The urban studies and urban physics literatures frequently use planar graphs to urban street networks. This study demonstrated that although in limited circumstances these models may be accurate, they can behave inconsistently across different kinds of cities by misrepresenting connectivity, accessibility, routing, intersection counts and densities, and street segment lengths. It found x, y, and z. It also demonstrated how these indicators can be used to characterize the type of urbanization, in particular its three-dimensionality, of different cities. Future research can explore this latter finding, as it likely correlates with other measures of urbanization, development, and era. Finally, future research might examine how nonplanar intersection counts represent true intersections if multiple adjacent edges form multiple graph intersections at a point where only one true intersection exists from an urban design perspective.
+The urban studies and urban physics literatures frequently use planar graphs to urban street networks. This study demonstrated that although in limited circumstances these models may be accurate, they behave inconsistently across different kinds of cities by misrepresenting connectivity, accessibility, routing, intersection counts and densities, and street segment lengths. It found x, y, and z. It also demonstrated how these indicators can be used to characterize the type of urbanization, in particular its transportation infrastructure's three-dimensionality, of different cities. Future research can explore this latter finding, as it likely correlates with other measures of urbanization, development, and era. Finally, future research might examine how nonplanar intersection counts represent true intersections if multiple adjacent edges form multiple graph intersections at a point where only one true intersection exists from an urban design perspective.
 
 
-\clearpage
+%\clearpage
 \bibliographystyle{apa}
 \bibliography{references}
 
