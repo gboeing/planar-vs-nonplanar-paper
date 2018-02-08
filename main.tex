@@ -32,7 +32,7 @@
 
 \begin{abstract}
 
-Models of street networks underlie research in urban travel behavior, accessibility, design patterns, and morphology. These models are commonly defined as planar, meaning that they can be represented in two dimensions without any underpasses or overpasses. However, real-world urban street networks exist in three-dimensional space and frequently feature grade separation such as bridges and tunnels: planar simplifications can be useful but might affect the results of real-world street network analysis. Further, a city's extent of nonplanarity could describe its infrastructure and urbanization. This study measures the nonplanarity of drivable and walkable street networks in the centers of 50 cities worldwide, then examines the variation of nonplanarity across a single city. It develops two new indicators: the Spatial Planarity Ratio and the Edge Length Ratio. While some street networks are approximately planar, we empirically quantify how planar simplifications can inconsistently but drastically misrepresent routing, connectivity, intersection counts/densities, and block lengths.
+Models of street networks underlie research in urban travel behavior, accessibility, design patterns, and morphology. These models are commonly defined as planar, meaning that they can be represented in two dimensions without any underpasses or overpasses. However, real-world urban street networks exist in three-dimensional space and frequently feature grade separation such as bridges and tunnels: planar simplifications can be useful but might affect the results of real-world street network analysis. Further, a city's extent of nonplanarity could describe its infrastructure and urbanization. This study measures the nonplanarity of drivable and walkable street networks in the centers of 50 cities worldwide, then examines the variation of nonplanarity across a single city. It develops two new indicators: the Spatial Planarity Ratio and the Edge Length Ratio. While some street networks are approximately planar, we empirically quantify how planar models can inconsistently but drastically misrepresent intersection counts/densities, block lengths, routing, and connectivity.
 
 \end{abstract}
 
@@ -154,9 +154,9 @@ Finally, we explore how these three indicators vary throughout a single city. To
 \end{figure*}
 
 \begin{figure}[htbp]
-	\includegraphics[width=0.48\textwidth]{figures_tables/regression_phi_split.png}
-	\caption{Log-log plot of $\lambda$ vs $\phi$ by network type with simple regression lines.}
-	\label{fig:regression_split}
+	\includegraphics[width=0.48\textwidth]{figures_tables/regression_lambda_phi_linear.png}
+	\caption{Plot of $\lambda$ vs $\phi$ by network type with simple regression lines (dashed=drive, dotted=walk).}
+	\label{fig:regression_lambda_phi}
 \end{figure}
 
 Table \ref{tab:world_cities} demonstrates how planar simplifications impact street network analysis results in these 50 city centers. Among the drivable street networks, only 20\% are formally planar. On average, they are 88.5\% spatially planar by the $\phi$ measure and 90\% by the $\lambda$ measure. The individual $\phi$ values indicate that spatial planarity ranges from a high of 100\% in seven of these cities to a low of 57\% in Moscow. The $\lambda$ values indicate that spatial planarity ranges from a high of 100\% in seven of these cities to a low of 63.5\% in Los Angeles. On average across these networks, planar models overcount intersections by 16\% and underestimate street segment lengths by 10\% (Equations \ref{eq:spr_overstates} and \ref{eq:elr_understates}).
@@ -167,7 +167,7 @@ Not all formally planar street networks are spatially planar. For example, Toron
 
 Mogadishu is the only city studied that demonstrates perfect planarity across all three indicators for both network types. All three Italian cities demonstrate perfect planarity in their centers' drivable networks, but not in their walkable networks. Further, the extent of nonplanarity is not consistent across network types: Dallas's walkable $\phi$ is 61\% greater than its drivable $\phi$, while Geneva's drivable $\phi$ is 19\% greater than its walkable $\phi$. Figure \ref{fig:world_map_bw} maps the distribution of $\phi$ values around the world. While nearly every European city is in the highest tercile, indicating their networks are more planar, most American cities are in the lowest tercile, indicating their networks are more nonplanar.
 
-Figure \ref{fig:regression_split} depicts the relationship between the $\phi$ and $\lambda$ indicators across all 50 cities for both network types, as a log-log plot. The indicators' log-log relationship is linear, positive, and very strong (drivable $r^2=0.98$ and walkable $r^2=0.99$). The coefficients of determination suggest that these two indicators unsurprisingly provide redundant statistical information about the extent to which a network is spatially planar. However, each assesses different implications of this bias for measuring the urban form.
+Figure \ref{fig:regression_lambda_phi} depicts the relationship between $\phi$ and $\lambda$ across all 50 cities for both network types: it is linear, positive, and very strong (drivable $r^2=0.985$ and walkable $r^2=0.994$). The coefficients of determination suggest that these two indicators unsurprisingly provide redundant statistical information about the extent to which a network is spatially planar. However, each assesses different implications of this bias for measuring the urban form.
 
 \begin{table}[htbp]
 	\centering
