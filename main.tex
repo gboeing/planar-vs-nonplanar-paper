@@ -61,12 +61,12 @@ A \emph{planar} graph can be drawn on a two-dimensional plane without any of its
 	\centering
 	\caption{Survey of recent statements in the research literature regarding the representation of street networks as planar graphs.}
 	\label{tab:planar_quotes}
-	\input{table_planar_quotes.tex}
+	\input{figures_tables/table_planar_quotes.tex}
 \end{table*}
 
 \begin{figure}[tbp]
 	\center
-	\includegraphics[width=0.48\textwidth]{planar_vs_not.png}
+	\includegraphics[width=0.48\textwidth]{figures_tables/planar_vs_not.png}
 	\caption{Formally and spatially planar (left) and nonplanar (right) road networks.}
 	\label{fig:planar_vs_not}
 \end{figure}
@@ -143,18 +143,18 @@ Finally, we explore how these three indicators vary throughout a single city. To
 	\centering
 	\caption{Planarity measures for central street networks in 50 cities worldwide (Planar = whether street network passed the formal test of planarity; $\phi$ = Spatial Planarity Ratio; $\lambda$ = Edge Length Ratio).}
 	\label{tab:world_cities}
-	\input{table_world_cities.tex}
+	\input{figures_tables/table_world_cities.tex}
 \end{table*}
 
 \begin{figure*}[htbp]
 	\center
-	\includegraphics[width=\textwidth]{world_map_bw.png}
+	\includegraphics[width=\textwidth]{figures_tables/world_map_bw.png}
 	\caption{Map of world cities from Table \ref{tab:world_cities} grouped by $\phi$ terciles (lower values mean less planar).}
 	\label{fig:world_map_bw}
 \end{figure*}
 
 \begin{figure}[htbp]
-	\includegraphics[width=0.48\textwidth]{regression_phi_split.png}
+	\includegraphics[width=0.48\textwidth]{figures_tables/regression_phi_split.png}
 	\caption{Log-log plot of $\lambda$ vs $\phi$ by network type with simple regression lines.}
 	\label{fig:regression_split}
 \end{figure}
@@ -173,7 +173,7 @@ Figure \ref{fig:regression_split} depicts the relationship between the $\phi$ an
 	\centering
 	\caption{Summary statistics of planarity indicators across 100 square-mile samples of Oakland, California's drivable network.}
 	\label{tab:samples_city}
-	\input{table_samples_city.tex}
+	\input{figures_tables/table_samples_city.tex}
 \end{table}
 
 Finally, we examine how these measures behave across an entire city. Oakland's city-wide street network is formally nonplanar. In terms of spatial planarity, the city has a $\phi$ score of 91.8\% and a $\lambda$ score of 93.6\%. This suggests that the planar representation of Oakland's drivable street network overstates the number of intersections --- and thus, the network's connectivity --- by 8.9\% city-wide and understates the average edge length by 6.4\% city-wide. However, these indicators vary across the city. To explore this statistical variation, Table \ref{tab:samples_city} presents summary statistics of these planarity indicators across 100 square-mile samples of Oakland's drivable street network. Our samples' mean $\phi$ and $\lambda$ scores are reasonably close to the city-wide values. However, the samples range from spatial planarity lows of 56.9\% ($\phi$) and 63.7\% ($\lambda$) up to highs of 100\%. 67\% of the samples pass the formal planarity test but 63\% of the samples are at least somewhat spatially nonplanar (i.e., $\phi < 1$).
