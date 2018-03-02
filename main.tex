@@ -1,4 +1,4 @@
-\documentclass[Afour,sageh,times]{sagej}
+\documentclass[Afour,doublespace,sageh,times]{sagej}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[USenglish]{babel}
@@ -7,29 +7,18 @@
 \usepackage{setspace}
 \usepackage{csquotes}
 \usepackage{url}
-\usepackage{moreverb}
-\usepackage[hidelinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
-\newcommand\BibTeX{{\rmfamily B\kern-.05em \textsc{i\kern-.025em b}\kern-.08em T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
-
+\usepackage[colorlinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
 
 \def\volumeyear{\the\year}
 
-
-\usepackage[final]{draftwatermark}
-\SetWatermarkText{DRAFT}
-\SetWatermarkScale{1}
-\SetWatermarkLightness{0.9}
-
-
-
 \begin{document}
 
-\runninghead{Author Redacted}
+\runninghead{}
 \title{Planarity and Street Network Representation in Urban Form Analysis}
-\author{Author Redacted\affilnum{1}}
-\affiliation{\affilnum{1}Affiliation redacted}
-\corrauth{Author Redacted, Address Redacted}
-\email{Email Redacted}
+\author{}
+\affiliation{}
+\corrauth{}
+\email{}
 
 
 
@@ -66,7 +55,8 @@ Graph theory is the mathematical study of networks \citep{newman_networks:_2010}
 A \emph{planar} graph can be drawn on a two-dimensional plane without any of its edges crossing each other, except where they intersect at nodes. If it cannot be drawn to meet this criterion, it is nonplanar \citep{trudeau_introduction_1994}. Street networks are embedded in space, which provides them with geometry---such as geographical coordinates, lengths, areas, shapes, and angles---along with their topology. This creates a minor wrinkle when we consider planarity: we must distinguish between a graph's mathematical/topological planarity, which we refer to as \emph{formal planarity}, and the planarity of its real-world spatial embedding, which we refer to as \emph{spatial planarity}. For example, a street network might be spatially nonplanar due to its embedding in space (i.e., it contains overpasses or underpasses in the real world), but it could still be formally planar. That is, if we \enquote{redraw} the graph by moving its nodes and edges around in space without changing how they are connected to one another (i.e., altering its geometry without altering its topology), there may exist some alternative spatial embedding that prevents edges crossing anywhere but at nodes \citep[for a thorough introduction see][p.~6]{barthelemy_morphogenesis_2017}. In such a case, the street network is formally planar from a topological perspective, but its real-world embedding is spatially nonplanar.
 
 \begin{figure}[tbp]
-	\includegraphics[width=0.48\textwidth]{figures/planar_vs_not_labels.png}
+	\centering
+	\includegraphics[width=0.48\textwidth]{fig_planar_vs_not_labels.png}
 	\caption{Spatial network examples. Gray lines = edges (i.e., street segments), circles = nodes (i.e., intersections and dead ends), red dots = two-dimensional line crossings (i.e., artificial nodes in planar representation).}
 	\label{fig:planar_vs_not}
 \end{figure}
@@ -151,19 +141,19 @@ Finally, street network models almost always impose an artificial boundary on th
 	\centering
 	\caption{Planarity measures for central street networks in 50 cities worldwide (Planar = whether street network passed the formal test of planarity; $\phi$ = Spatial Planarity Ratio; $\lambda$ = Edge Length Ratio).}
 	\label{tab:world_cities}
-	\input{tables/table_world_cities.tex}
+	\input{table_world_cities.tex}
 \end{table*}
 
 \begin{figure*}[htbp]
 	\centering
-	\includegraphics[width=\textwidth]{figures/world_map_bw.png}
+	\includegraphics[width=\textwidth]{fig_world_map_bw.png}
 	\caption{Map of world cities from Table \ref{tab:world_cities} grouped by drivable $\phi$ terciles (lower values mean less planar).}
 	\label{fig:world_map_bw}
 \end{figure*}
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.48\textwidth]{figures/regression_lambda_phi_linear.png}
+	\includegraphics[width=0.48\textwidth]{fig_regression_lambda_phi_linear.png}
 	\caption{Plot of $\lambda$ vs $\phi$ by network type with regression lines.}
 	\label{fig:regression_lambda_phi}
 \end{figure}
@@ -182,7 +172,7 @@ Figure \ref{fig:regression_lambda_phi} depicts the relationship between $\phi$ a
 	\centering
 	\caption{Summary statistics of planarity indicators across 100 square-mile samples of Oakland, California's drivable network.}
 	\label{tab:samples_city}
-	\input{tables/table_samples_city.tex}
+	\input{table_samples_city.tex}
 \end{table}
 
 Finally, we examine how these measures behave across an entire city. Oakland's city-wide street network is formally nonplanar. In terms of spatial planarity, the city has a $\phi$ of 91.6\% and a $\lambda$ of 92.9\%. This suggests that the planar representation of Oakland's drivable street network overstates the number of intersections---and thus, the network's connectivity---by 9.2\% city-wide and understates the average edge length by 7.1\% city-wide. However, these indicators vary across the city (Table \ref{tab:samples_city}). The samples' mean $\phi$ and $\lambda$ scores are reasonably close to the city-wide values. However, the samples range from spatial planarity lows of 56.9\% ($\phi$) and 56.7\% ($\lambda$) up to highs of 100\%. 67\% of the samples pass the formal planarity test, but 63\% of the samples are at least somewhat spatially nonplanar (i.e., $\phi < 1$).
@@ -230,9 +220,7 @@ Street networks are often defined and modeled as planar graphs in the urban stud
 Redacted.
 
 
-
-%\clearpage
-\bibliographystyle{apalike}
-\bibliography{references}
+\bibliographystyle{SageH}
+\bibliography{references.bib}
 
 \end{document}
